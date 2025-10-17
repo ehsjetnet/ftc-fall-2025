@@ -59,7 +59,7 @@ public final class LayerSetupInfo {
         RobotController robotController,
         RobotLocalizer robotLocalizer,
         Gamepad gamepad0,
-        Gamepad gamepad1,
+        Gamepad gamepad1
     ) {
         this.hardwareMap = hardwareMap;
         this.robotController = robotController;

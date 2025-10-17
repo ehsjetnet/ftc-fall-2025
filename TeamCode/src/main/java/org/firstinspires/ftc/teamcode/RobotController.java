@@ -82,15 +82,14 @@ public class RobotController {
         RobotLocalizer robotLocalizer,
         List<Layer> layerStack,
         Gamepad gamepad0,
-        Gamepad gamepad1,
+        Gamepad gamepad1
     ) {
         LayerSetupInfo setupInfo = new LayerSetupInfo(
             hardwareMap,
             this,
             robotLocalizer,
             gamepad0,
-            gamepad1,
-        );
+            gamepad1);
         this.layers = layerStack.stream().map(layer -> {
             layer.setup(setupInfo);
             return new LayerInfo(layer);
@@ -119,6 +118,11 @@ public class RobotController {
         ListIterator<LayerInfo> layerIter = layers.listIterator();
         while (true) {
             layer = layerIter.next();
+            if (!layer.isTaskDone()) {
+                //telem.addData("Highest updated layer", layer.getName());
+                //logger.update("Highest updated layer", layer.getName());
+                break;
+            }
             if (!layerIter.hasNext()) {
                 // No tasks left in any layer, inform all listeners of completion
                 for (Runnable listener : teardownListeners) {
