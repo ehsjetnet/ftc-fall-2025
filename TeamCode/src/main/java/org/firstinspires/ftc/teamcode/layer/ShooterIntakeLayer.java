@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.layer;
 import java.util.Iterator;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.CRServo;
 
 import org.firstinspires.ftc.teamcode.layer.Layer;
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.layer.LayerSetupInfo;
 import org.firstinspires.ftc.teamcode.task.Task;
 import org.firstinspires.ftc.teamcode.task.TeleopAgitatorTask;
 import org.firstinspires.ftc.teamcode.task.TeleopFeederTask;
+import org.firstinspires.ftc.teamcode.task.TeleopShooterTask;
 
 public final class ShooterIntakeLayer implements Layer {
 
@@ -53,7 +55,10 @@ public final class ShooterIntakeLayer implements Layer {
         } else if (task instanceof TeleopFeederTask) {
             TeleopFeederTask castedTask = (TeleopFeederTask) task;
             coreHexFeeder.setPower(castedTask.getCoreHexPower());
-        } 
+        } else if (task instanceof TeleopShooterTask) {
+            TeleopShooterTask castedTask = (TeleopShooterTask) task;
+            ((DcMotorEx) flywheel).setVelocity(castedTask.getFlywheelVelocity());
+        }
         // else if (task instanceof TeleopShooterTask) {
         //     TeleopShooterTask
         // }
