@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.layer.input.GamepadInputGenerator;
 import org.firstinspires.ftc.teamcode.layer.input.mapping.JoystickHoloDriveMapping;
 import org.firstinspires.ftc.teamcode.layer.input.mapping.TeleopAgitatorMapping;
 import org.firstinspires.ftc.teamcode.layer.input.mapping.TeleopFeederMapping;
+import org.firstinspires.ftc.teamcode.layer.input.mapping.TeleopShooterMapping;
 
 @TeleOp(name="Base Kit Teleop")
 public final class BasekitBotOpMode extends AbstractLayerOpMode{
@@ -30,7 +31,8 @@ public final class BasekitBotOpMode extends AbstractLayerOpMode{
             new MultiplexLayer(Arrays.asList(
                 new JoystickHoloDriveMapping(),
                 new TeleopAgitatorMapping(),
-                new TeleopFeederMapping()
+                new TeleopFeederMapping(),
+                new TeleopShooterMapping()
             )),
             new TopLayerSequence(Arrays.asList(
                 new GamepadInputGenerator()
