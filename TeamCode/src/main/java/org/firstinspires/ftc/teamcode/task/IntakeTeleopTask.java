@@ -1,60 +1,41 @@
 package org.firstinspires.ftc.teamcode.task;
 
+import org.firstinspires.ftc.teamcode.task.Task;
+
 /**
  * Controls the intake in teleop.
  */
 public class IntakeTeleopTask implements Task {
+
+    private final boolean runServoLeft;
+
+    private final boolean runServoRight;
+
+    private final boolean runCoreHexMotorForward;
+
+    private final boolean runCoreHexMotorReverse;
     
-    /**
-    * Which direction to run the agitator: True being forward, False being reversed.
-    */
-    private final boolean runServoDirection;
-
-    /**
-    * Which direction to run the core hex motor: True being forward, False being reversed.
-    */
-    private final boolean runCoreHexMotorDirection;
-
-    /**
-    * A power to directly give to the agitator actuator.
-    */
-    private final double servoPower;
-
-    /**
-    * A power to directly give to the agitator actuator.
-    */
-    private final double coreHexPower;
-
-    /**
-     * Constructs an IntakeTeleopTask.
-     * @param runServoDirection - Which direction to run the agitator: True being forward, False being reversed.
-     * @param runCoreHexMotorDirection - which direction to run the core hex motor: True being forward, False being reversed.
-     * @param servoPower - a power to directly give to the agitator actuator.
-     * @param coreHexPower - a power to directly give to the core hex motor.
-     */
-    public IntakeTeleopTask(boolean runServoDirection, boolean runCoreHexMotorDirection, double servoPower, double coreHexPower) {
-        this.runServo = runServo;
-        this.runCoreHexMotor = runCoreHexMotor;
-        this.servoPower = servoPower;
-        this.coreHexPower = coreHexPower;
+    public IntakeTeleopTask(boolean runServoLeft, boolean runServoRight, boolean runCoreHexMotorForward, boolean runCoreHexMotorReverse) {
+        this.runServoLeft = runServoLeft;
+        this.runServoRight = runServoRight;
+        this.runCoreHexMotorForward = runCoreHexMotorForward;
+        this.runCoreHexMotorReverse = runCoreHexMotorReverse;
     }
 
-    /** 
-     * Returns which direction the agitator should go.
-     * 
-     * @return Returns which direction the agitator should go.
-    */
-    public final boolean getRunServoDirection() {
-        return runServoDirection;
+    public final boolean getRunServoLeft() {
+        return runServoLeft;
     }
 
-    /** 
-     * Returns which direction the core hex motor should go.
-     * 
-     * @return which direction the agitator should go..
-    */
-    public final boolean getRunCoreHexMotorDirection() {
-        return runCoreHexMotorDirection;
+    public final boolean getRunServoRight() {
+        return runServoRight;
+    }
+
+    public final boolean getRunCoreHexMotorFoward() {
+        return runCoreHexMotorForward;
+    }
+
+    public final boolean getRunCoreHexMotorReverse() {
+        return runCoreHexMotorReverse;
     }
 
     /** 
@@ -63,7 +44,13 @@ public class IntakeTeleopTask implements Task {
      * @return a power to directly give to the agitator actuator.
     */
     public final double getServoPower() {
-        return servoPower;
+        if (runServoLeft) {
+            return 1;
+        } else if (runServoRight) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 
     /** 
@@ -72,6 +59,12 @@ public class IntakeTeleopTask implements Task {
      * @return a power to directly give to the core hex motor.
     */
     public final double getCoreHexPower() {
-        return coreHexPower;
+        if (runCoreHexMotorForward) {
+            return 0.5;
+        } else if (runCoreHexMotorReverse) {
+            return -0.5;
+        } else {
+            return 0;
+        }
     }
 }

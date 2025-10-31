@@ -8,12 +8,13 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import org.firstinspires.ftc.teamcode.layer.Layer;
 import org.firstinspires.ftc.teamcode.layer.LayerSetupInfo;
 import org.firstinspires.ftc.teamcode.task.Task;
+import org.firstinspires.ftc.teamcode.task.IntakeTeleopTask;
 
 public final class IntakeLayer implements Layer {
 
-    private static final String coreHexFeederName = "placeholder";
+    private static final String coreHexFeederName = "coreHex";
 
-    private static final String agitatorServoName = "placeholder";
+    private static final String agitatorServoName = "servo";
 
     private DcMotor coreHexFeeder;
 
@@ -24,9 +25,9 @@ public final class IntakeLayer implements Layer {
     public IntakeLayer() {}
 
     @Override
-    public void setup(LayerSetupInfo initInfo) {
-        coreHexFeeder = initInfo.getHardwareMap.get(DcMotor.class, coreHexFeederName);
-        agitator = initInfo.getHardwareMap.get(CRServo.class, agitatorServoName);
+    public void setup(LayerSetupInfo setupInfo) {
+        coreHexFeeder = setupInfo.getHardwareMap().get(DcMotor.class, coreHexFeederName);
+        agitator = setupInfo.getHardwareMap().get(CRServo.class, agitatorServoName);
         isFinished = true;
     }
     
@@ -40,7 +41,11 @@ public final class IntakeLayer implements Layer {
 
     @Override
     public void acceptTask(Task task){
-        /*put tasks here once they have been made */
+        if (task instanceof IntakeTeleopTask) {
+            IntakeTeleopTask castedTask = (IntakeTeleopTask) task;
+            coreHexFeeder.setPower(castedTask.getCoreHexPower());
+            agitator.setPower(castedTask.getServoPower());
+        }
     }
 
 
