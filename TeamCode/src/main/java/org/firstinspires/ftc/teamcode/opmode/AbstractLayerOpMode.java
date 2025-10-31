@@ -7,8 +7,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.RobotController;
 import org.firstinspires.ftc.teamcode.layer.Layer;
 import org.firstinspires.ftc.teamcode.localization.RobotLocalizer;
-import org.firstinspires.ftc.teamcode.logging.Logger;
-import org.firstinspires.ftc.teamcode.logging.LoggerProvider;
 
 /**
  * Base class for opmodes that use a RobotController to execute Layers.
@@ -24,25 +22,16 @@ public abstract class AbstractLayerOpMode extends OpMode {
      */
     private boolean finished;
 
-    /**
-     * The logger.
-     */
-    private Logger logger;
-
     @Override
     public final void init() {
         controller = new RobotController();
         finished = false;
-        LoggerProvider loggerProvider = new LoggerProvider();
-        configureLogger(loggerProvider);
-        logger = loggerProvider.getLogger("AbstractLayerOpMode");
-        controller.setup(hardwareMap, getLocalizer(), getLayers(), gamepad1, gamepad2, loggerProvider);
+        controller.setup(hardwareMap, getLocalizer(), getLayers(), gamepad1, gamepad2);
     }
 
     @Override
     public final void loop() {
         if (!finished && controller.update()) {
-            logger.log("Finished!");
             finished = true;
         }
     }
@@ -63,15 +52,5 @@ public abstract class AbstractLayerOpMode extends OpMode {
      */
     protected RobotLocalizer getLocalizer() {
         return null;
-    }
-
-    /**
-     * Configures the LoggerProvider that will be passed to layers during initialization.
-     * Override this method to do opmode-specific configuration for the global LoggerProvider.
-     *
-     * @param loggerProvider the LoggerProvider to configure.
-     */
-    protected void configureLogger(LoggerProvider loggerProvider) {
-        // Do nothing
     }
 }

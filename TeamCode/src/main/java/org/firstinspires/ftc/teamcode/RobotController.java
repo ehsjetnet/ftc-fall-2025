@@ -13,8 +13,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.layer.Layer;
 import org.firstinspires.ftc.teamcode.layer.LayerSetupInfo;
 import org.firstinspires.ftc.teamcode.localization.RobotLocalizer;
-import org.firstinspires.ftc.teamcode.logging.Logger;
-import org.firstinspires.ftc.teamcode.logging.LoggerProvider;
 import org.firstinspires.ftc.teamcode.task.Task;
 import org.firstinspires.ftc.teamcode.task.UnsupportedTaskException;
 
@@ -62,11 +60,6 @@ public class RobotController {
     private List<LayerInfo> layers;
 
     /**
-     * The logger.
-     */
-    private Logger logger;
-
-    /**
      * Constructs a RobotController.
      */
     public RobotController() {
@@ -83,25 +76,20 @@ public class RobotController {
      * @param layerStack - the layer stack to use.
      * @param gamepad0 - the first connected Gamepad, or null if none is connected or available.
      * @param gamepad1 - the second connected Gamepad, or null if none is connected or available.
-     * @param loggerProvider - the base LoggerProvider whose clones should be passed to the layers.
      */
     public void setup(
         HardwareMap hardwareMap,
         RobotLocalizer robotLocalizer,
         List<Layer> layerStack,
         Gamepad gamepad0,
-        Gamepad gamepad1,
-        LoggerProvider loggerProvider
+        Gamepad gamepad1
     ) {
-        logger = loggerProvider.getLogger("RobotController");
         LayerSetupInfo setupInfo = new LayerSetupInfo(
             hardwareMap,
             this,
             robotLocalizer,
             gamepad0,
-            gamepad1,
-            loggerProvider
-        );
+            gamepad1);
         this.layers = layerStack.stream().map(layer -> {
             layer.setup(setupInfo);
             return new LayerInfo(layer);
@@ -131,7 +119,8 @@ public class RobotController {
         while (true) {
             layer = layerIter.next();
             if (!layer.isTaskDone()) {
-                logger.update("Highest updated layer", layer.getName());
+                //telem.addData("Highest updated layer", layer.getName());
+                //logger.update("Highest updated layer", layer.getName());
                 break;
             }
             if (!layerIter.hasNext()) {

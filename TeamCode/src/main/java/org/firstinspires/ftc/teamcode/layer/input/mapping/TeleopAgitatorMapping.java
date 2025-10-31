@@ -4,17 +4,11 @@ import org.firstinspires.ftc.teamcode.layer.AbstractFunctionLayer;
 import org.firstinspires.ftc.teamcode.layer.LayerSetupInfo;
 import org.firstinspires.ftc.teamcode.task.GamepadInputTask;
 import org.firstinspires.ftc.teamcode.task.Task;
-import org.firstinspires.ftc.teamcode.task.TowerHangTask;
 import org.firstinspires.ftc.teamcode.task.UnsupportedTaskException;
+import org.firstinspires.ftc.teamcode.task.TeleopAgitatorTask;
 
-/**
- * Button mappings for hanging the robot using tower.
- */
-public final class TowerHangMapping extends AbstractFunctionLayer {
-    /**
-     * Constructor for TowerHangMapping.
-     */
-    public TowerHangMapping() { }
+public final class TeleopAgitatorMapping extends AbstractFunctionLayer {
+    public TeleopAgitatorMapping() { }
 
     @Override
     public void setup(LayerSetupInfo setupInfo) { }
@@ -23,10 +17,7 @@ public final class TowerHangMapping extends AbstractFunctionLayer {
     public Task map(Task task) {
         if (task instanceof GamepadInputTask) {
             GamepadInputTask castedTask = (GamepadInputTask) task;
-            boolean hang = castedTask.gamepad0.buttons.y;
-            boolean unhang = castedTask.gamepad0.buttons.a;
-            boolean valid = !(hang && unhang);
-            return new TowerHangTask(hang && valid, unhang && valid);
+            return new TeleopAgitatorTask(castedTask.gamepad0.dpad.left, castedTask.gamepad0.dpad.right);
         } else {
             throw new UnsupportedTaskException(this, task);
         }

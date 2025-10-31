@@ -5,8 +5,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.RobotController;
 import org.firstinspires.ftc.teamcode.localization.RobotLocalizer;
-import org.firstinspires.ftc.teamcode.logging.Logger;
-import org.firstinspires.ftc.teamcode.logging.LoggerProvider;
 
 /**
  * Contains the information needed to initialize a layer.
@@ -42,7 +40,6 @@ public final class LayerSetupInfo {
     /**
      * The base LoggerProvider whose clones are used by layers.
      */
-    private final LoggerProvider loggerProvider;
 
     /**
      * Creates a LayerSetupInfo.
@@ -56,22 +53,19 @@ public final class LayerSetupInfo {
      * available or connected.
      * @param gamepad1 the Gamepad connected to the second slot, or null if no such gamepad is
      * available or connected.
-     * @param loggerProvider the base LoggerProvider whose clones should be passed to the layers.
      */
     public LayerSetupInfo(
         HardwareMap hardwareMap,
         RobotController robotController,
         RobotLocalizer robotLocalizer,
         Gamepad gamepad0,
-        Gamepad gamepad1,
-        LoggerProvider loggerProvider
+        Gamepad gamepad1
     ) {
         this.hardwareMap = hardwareMap;
         this.robotController = robotController;
         this.robotLocalizer = robotLocalizer;
         this.gamepad0 = gamepad0;
         this.gamepad1 = gamepad1;
-        this.loggerProvider = loggerProvider;
     }
 
     /**
@@ -111,25 +105,6 @@ public final class LayerSetupInfo {
      */
     public Gamepad getGamepad1() {
         return gamepad1;
-    }
-
-    /**
-     * Returns a LoggerProvider cloned from the base one given to the RobotController.
-     *
-     * @return A new LoggerProvider with the same configuration as the base one.
-     */
-    public LoggerProvider getLoggerProvider() {
-        return loggerProvider.clone();
-    }
-
-    /**
-     * Returns a Logger created by the base LoggerProvider.
-     *
-     * @param label the label of the Logger to create.
-     * @return The created logger.
-     */
-    public Logger getLogger(String label) {
-        return loggerProvider.getLogger(label);
     }
 
     /**

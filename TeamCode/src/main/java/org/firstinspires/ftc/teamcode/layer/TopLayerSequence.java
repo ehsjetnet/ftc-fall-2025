@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.firstinspires.ftc.teamcode.logging.Logger;
 import org.firstinspires.ftc.teamcode.task.Task;
 import org.firstinspires.ftc.teamcode.task.UnsupportedTaskException;
 
@@ -34,11 +33,6 @@ public final class TopLayerSequence implements Layer {
     private Layer layer;
 
     /**
-     * The logger.
-     */
-    private Logger logger;
-
-    /**
      * Constructs a TopLayerSequence.
      *
      * @param layers - the list of top-level layers to iterate through.
@@ -58,7 +52,6 @@ public final class TopLayerSequence implements Layer {
             .map(Object::getClass)
             .map(Class<?>::getSimpleName)
             .collect(Collectors.joining()) + "]";
-        logger = setupInfo.getLogger(name);
         for (Layer l : layers) {
             l.setup(setupInfo);
         }
