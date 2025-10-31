@@ -23,7 +23,7 @@ public class TeleopShooterTask implements Task {
         return manualBankShot;
     }
 
-    public final boolean getMnaualFarShot(){
+    public final boolean getManualFarShot(){
         return manualFarShot;
     }
 

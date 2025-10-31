@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.task.Task;
 import org.firstinspires.ftc.teamcode.task.TeleopAgitatorTask;
 import org.firstinspires.ftc.teamcode.task.TeleopFeederTask;
 import org.firstinspires.ftc.teamcode.task.TeleopShooterTask;
+import org.firstinspires.ftc.teamcode.task.AutoShooterTask;
 
 public final class ShooterIntakeLayer implements Layer {
 
@@ -58,9 +59,15 @@ public final class ShooterIntakeLayer implements Layer {
         } else if (task instanceof TeleopShooterTask) {
             TeleopShooterTask castedTask = (TeleopShooterTask) task;
             ((DcMotorEx) flywheel).setVelocity(castedTask.getFlywheelVelocity());
+        } else if (task instanceof AutoShooterTask) {
+            AutoShooterTask castedTask = (AutoShooterTask) task;
+            ((DcMotorEx) flywheel).setVelocity(castedTask.getFlywheelVelocity());
+            agitator.setPower(castedTask.getServoPower());
+            if (((DcMotorEx) flywheel).getVelocity() >= castedTask.getFlywheelVelocity()-75) {
+                coreHexFeeder.setPower(castedTask.getCoreHexPower());
+            } else {
+                coreHexFeeder.setPower(0);
+            }
         }
-        // else if (task instanceof TeleopShooterTask) {
-        //     TeleopShooterTask
-        // }
     }
 }
