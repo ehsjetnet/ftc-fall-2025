@@ -33,7 +33,7 @@ public final class BasekitBotOpMode extends AbstractLayerOpMode{
                 new JoystickHoloDriveMapping(),
                 new TeleopAgitatorMapping(),
                 new TeleopFeederMapping(),
-                new TeleopShooterMapping().
+                new TeleopShooterMapping(),
                 new AutoShooterMapping()
             )),
             new TopLayerSequence(Arrays.asList(
