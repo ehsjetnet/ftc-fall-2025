@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.task.Task;
 import org.firstinspires.ftc.teamcode.task.TeleopAgitatorTask;
 import org.firstinspires.ftc.teamcode.task.TeleopFeederTask;
 
-public final class ShooterLayer implements Layer {
+public final class ShooterIntakeLayer implements Layer {
 
     private static final String coreHexFeederName = "coreHex";
 
@@ -27,7 +27,7 @@ public final class ShooterLayer implements Layer {
 
     private boolean isFinished;
 
-    public ShooterLayer() {}
+    public ShooterIntakeLayer() {}
 
     @Override
     public void setup(LayerSetupInfo setupInfo) {

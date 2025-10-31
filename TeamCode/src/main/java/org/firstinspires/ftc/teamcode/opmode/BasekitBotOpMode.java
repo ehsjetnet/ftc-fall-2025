@@ -8,11 +8,12 @@ import java.util.Arrays;
 import org.firstinspires.ftc.teamcode.layer.Layer;
 import org.firstinspires.ftc.teamcode.layer.MultiplexLayer;
 import org.firstinspires.ftc.teamcode.layer.TopLayerSequence;
-import org.firstinspires.ftc.teamcode.layer.IntakeLayer;
+import org.firstinspires.ftc.teamcode.layer.ShooterIntakeLayer;
 import org.firstinspires.ftc.teamcode.layer.drive.MecanumDrive;
 import org.firstinspires.ftc.teamcode.layer.input.GamepadInputGenerator;
 import org.firstinspires.ftc.teamcode.layer.input.mapping.JoystickHoloDriveMapping;
-import org.firstinspires.ftc.teamcode.layer.input.mapping.IntakeTeleopMapping;
+import org.firstinspires.ftc.teamcode.layer.input.mapping.TeleopAgitatorMapping;
+import org.firstinspires.ftc.teamcode.layer.input.mapping.TeleopFeederMapping;
 
 @TeleOp(name="Base Kit Teleop")
 public final class BasekitBotOpMode extends AbstractLayerOpMode{
@@ -24,11 +25,12 @@ public final class BasekitBotOpMode extends AbstractLayerOpMode{
         return Arrays.asList(
             new MultiplexLayer(Arrays.asList(
                 new MecanumDrive(),
-                new IntakeLayer()
+                new ShooterIntakeLayer()
             )),
             new MultiplexLayer(Arrays.asList(
                 new JoystickHoloDriveMapping(),
-                new IntakeTeleopMapping()
+                new TeleopAgitatorMapping(),
+                new TeleopFeederMapping()
             )),
             new TopLayerSequence(Arrays.asList(
                 new GamepadInputGenerator()
