@@ -24,12 +24,7 @@ public class AutoShooterTask implements Task {
         return autoFarShot;
     }
 
-    /** 
-     * Returns a velocity to directly give to the core hex motor.
-     * 
-     * @return a velocity to directly give to the core hex motor.
-    */
-    public final double getFlywheelVelocity() {
+    public final double getShootingVelocity(){
         if (autoBankShot) {
             return 1300;
         } else if (autoFarShot) {
@@ -37,13 +32,5 @@ public class AutoShooterTask implements Task {
         } else {
             return 0;
         }
-    }
-
-    public final double getServoPower() {
-        return -1;
-    }
-
-    public final double getCoreHexPower() {
-        return 1;
     }
 }

@@ -16,17 +16,13 @@ import org.firstinspires.ftc.teamcode.task.AutoShooterTask;
 
 public final class ShooterIntakeLayer implements Layer {
 
-    private static final String coreHexFeederName = "coreHex";
-
     private static final String flywheelMotorName = "flywheel";
 
-    private static final String agitatorServoName = "servo";
-
-    private DcMotor coreHexFeeder;
+    private static final String intakeMotorName = "bandy";
 
     private DcMotor flywheel;
 
-    private CRServo agitator;
+    private DcMotor bandy;
 
     private boolean isFinished;
 
@@ -34,9 +30,9 @@ public final class ShooterIntakeLayer implements Layer {
 
     @Override
     public void setup(LayerSetupInfo setupInfo) {
-        coreHexFeeder = setupInfo.getHardwareMap().get(DcMotor.class, coreHexFeederName);
         flywheel = setupInfo.getHardwareMap().get(DcMotor.class, flywheelMotorName);
-        agitator = setupInfo.getHardwareMap().get(CRServo.class, agitatorServoName);
+        bandy = setupInfo.getHardwareMap().get(DcMotor.class, intakeMotorName);
+        flywheel.setDirection(DcMotor.Direction.REVERSE);
         isFinished = true;
     }
     
@@ -50,23 +46,13 @@ public final class ShooterIntakeLayer implements Layer {
 
     @Override
     public void acceptTask(Task task){
-        if (task instanceof TeleopAgitatorTask) {
-            TeleopAgitatorTask castedTask = (TeleopAgitatorTask) task;
-            agitator.setPower(castedTask.getServoPower());
-        } else if (task instanceof TeleopFeederTask) {
-            TeleopFeederTask castedTask = (TeleopFeederTask) task;
-            coreHexFeeder.setPower(castedTask.getCoreHexPower());
-        } else if (task instanceof TeleopShooterTask) {
-            TeleopShooterTask castedTask = (TeleopShooterTask) task;
-            ((DcMotorEx) flywheel).setVelocity(castedTask.getFlywheelVelocity());
-        } else if (task instanceof AutoShooterTask) {
+        if (task instanceof AutoShooterTask) {
             AutoShooterTask castedTask = (AutoShooterTask) task;
-            ((DcMotorEx) flywheel).setVelocity(castedTask.getFlywheelVelocity());
-            agitator.setPower(castedTask.getServoPower());
-            if (((DcMotorEx) flywheel).getVelocity() >= castedTask.getFlywheelVelocity()-75) {
-                coreHexFeeder.setPower(castedTask.getCoreHexPower());
+            ((DcMotorEx) flywheel).setVelocity(castedTask.getShootingVelocity());
+            if (((DcMotorEx) flywheel).getVelocity() >= castedTask.getShootingVelocity()){
+                bandy.setPower(0.5);
             } else {
-                coreHexFeeder.setPower(0);
+                bandy.setPower(0);
             }
         }
     }

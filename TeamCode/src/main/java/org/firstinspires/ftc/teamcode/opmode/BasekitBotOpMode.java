@@ -33,9 +33,7 @@ public final class BasekitBotOpMode extends AbstractLayerOpMode{
                 new JoystickHoloDriveMapping(),
                 new AutoShooterMapping()
             )),
-            new TopLayerSequence(Arrays.asList(
-                new GamepadInputGenerator()
-            ))
+            new GamepadInputGenerator()
         );
     }
 }

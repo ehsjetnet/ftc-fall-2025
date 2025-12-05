@@ -17,7 +17,9 @@ public final class AutoShooterMapping extends AbstractFunctionLayer {
     public Task map(Task task) {
         if (task instanceof GamepadInputTask) {
             GamepadInputTask castedTask = (GamepadInputTask) task;
-            return new AutoShooterTask(castedTask.gamepad0.bumpers.left, castedTask.gamepad0.bumpers.right);
+            boolean shootClose = castedTask.gamepad0.bumpers.left;
+            boolean shootFar = castedTask.gamepad0.bumpers.right;
+            return new AutoShooterTask(shootClose, shootFar);
         } else {
             throw new UnsupportedTaskException(this, task);
         }
