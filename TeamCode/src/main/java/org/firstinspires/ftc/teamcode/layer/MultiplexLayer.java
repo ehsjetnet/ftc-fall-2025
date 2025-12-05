@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.firstinspires.ftc.teamcode.logging.Logger;
 import org.firstinspires.ftc.teamcode.task.Task;
 import org.firstinspires.ftc.teamcode.task.UnsupportedTaskException;
 
@@ -22,11 +21,6 @@ public final class MultiplexLayer implements Layer {
      * The list of component layers.
      */
     private final List<Layer> layers;
-
-    /**
-     * The logger.
-     */
-    private Logger logger;
 
     /**
      * Constructs a MultiplexLayer.
@@ -43,7 +37,6 @@ public final class MultiplexLayer implements Layer {
             .map(Object::getClass)
             .map(Class<?>::getSimpleName)
             .collect(Collectors.joining()) + "]";
-        logger = setupInfo.getLogger(name);
         for (Layer layer : layers) {
             layer.setup(setupInfo);
         }

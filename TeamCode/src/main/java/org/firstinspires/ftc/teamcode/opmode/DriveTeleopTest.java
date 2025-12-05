@@ -1,22 +1,22 @@
 package org.firstinspires.ftc.teamcode.opmode;
 
-import com.qualcomm.robotcore.eventloop.opmode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import java.util.list;
+import java.util.List;
 import java.util.Arrays;
 
-import org.firstinspires.ftc.layer.GamepadInputGenerator;
-import org.firstinspires.ftc.layer.JoystickHoloDriveMapping;
-import org.firstinspires.ftc.layer.Layer;
-import org.firstinspires.ftc.layer.drive.MecanumDrive;
+import org.firstinspires.ftc.teamcode.layer.Layer;
+import org.firstinspires.ftc.teamcode.layer.drive.MecanumDrive;
+import org.firstinspires.ftc.teamcode.layer.input.GamepadInputGenerator;
+import org.firstinspires.ftc.teamcode.layer.input.mapping.JoystickHoloDriveMapping;
 
-@Teleop(name="Test Drive")
-public final class DriveTeleopTest implements AbstractLayerOpMode{
+@TeleOp(name="Drive")
+public final class DriveTeleopTest extends AbstractLayerOpMode{
 
     public DriveTeleopTest() { }
 
     @Override
-    public List<Layer> getLayers() {
+    protected List<Layer> getLayers() {
         return Arrays.asList(
             new MecanumDrive(),
             new JoystickHoloDriveMapping(),
