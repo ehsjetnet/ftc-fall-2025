@@ -32,7 +32,6 @@ public final class ShooterIntakeLayer implements Layer {
     public void setup(LayerSetupInfo setupInfo) {
         flywheel = setupInfo.getHardwareMap().get(DcMotor.class, flywheelMotorName);
         bandy = setupInfo.getHardwareMap().get(DcMotor.class, intakeMotorName);
-        flywheel.setDirection(DcMotor.Direction.REVERSE);
         isFinished = true;
     }
     
@@ -48,10 +47,19 @@ public final class ShooterIntakeLayer implements Layer {
     public void acceptTask(Task task){
         if (task instanceof AutoShooterTask) {
             AutoShooterTask castedTask = (AutoShooterTask) task;
-            ((DcMotorEx) flywheel).setVelocity(castedTask.getShootingVelocity());
-            if (((DcMotorEx) flywheel).getVelocity() >= castedTask.getShootingVelocity()){
-                bandy.setPower(0.5);
+            if (castedTask.getAutoBankShot()) {
+                flywheel.setPower(castedTask.getShootingPower());
+                if (((DcMotorEx) flywheel).getVelocity() >= 300){
+                    bandy.setPower(1.0);
+                }
+            }
+            else if (castedTask.getAutoFarShot()) {
+                flywheel.setPower(castedTask.getShootingPower());
+                if (((DcMotorEx) flywheel).getVelocity() >= 400){
+                    bandy.setPower(1.0);
+                }
             } else {
+                flywheel.setPower(0);
                 bandy.setPower(0);
             }
         }

@@ -17,18 +17,18 @@ public class AutoShooterTask implements Task {
     }
 
     public final boolean getAutoBankShot() {
-        return autoBankShot;
+        return this.autoBankShot;
     }
 
     public final boolean getAutoFarShot(){
-        return autoFarShot;
+        return this.autoFarShot;
     }
 
-    public final double getShootingVelocity(){
-        if (autoBankShot) {
-            return 1300;
-        } else if (autoFarShot) {
-            return 1800;
+    public final double getShootingPower(){
+        if (this.autoBankShot) {
+            return 1.0;
+        } else if (this.autoFarShot) {
+            return 1.0;
         } else {
             return 0;
         }
