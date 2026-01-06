@@ -20,9 +20,13 @@ public final class ShooterIntakeLayer implements Layer {
 
     private static final String intakeMotorName = "bandy";
 
+    private static final String agitatorName = "servo 1";
+
     private DcMotor flywheel;
 
     private DcMotor bandy;
+
+    private CRServo agitator;
 
     private boolean isFinished;
 
@@ -32,6 +36,7 @@ public final class ShooterIntakeLayer implements Layer {
     public void setup(LayerSetupInfo setupInfo) {
         flywheel = setupInfo.getHardwareMap().get(DcMotor.class, flywheelMotorName);
         bandy = setupInfo.getHardwareMap().get(DcMotor.class, intakeMotorName);
+	agitator = setupInfo.getHardwareMap().get(CRServo.class, agitatorName);
         isFinished = true;
     }
     
