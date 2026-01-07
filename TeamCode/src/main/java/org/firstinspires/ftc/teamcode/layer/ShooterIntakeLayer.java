@@ -30,42 +30,53 @@ public final class ShooterIntakeLayer implements Layer {
 
     private boolean isFinished;
 
-    public ShooterIntakeLayer() {}
+    public ShooterIntakeLayer() {
+    }
 
     @Override
     public void setup(LayerSetupInfo setupInfo) {
         flywheel = setupInfo.getHardwareMap().get(DcMotor.class, flywheelMotorName);
         bandy = setupInfo.getHardwareMap().get(DcMotor.class, intakeMotorName);
-	agitator = setupInfo.getHardwareMap().get(CRServo.class, agitatorName);
+        agitator = setupInfo.getHardwareMap().get(CRServo.class, agitatorName);
         isFinished = true;
     }
-    
+
     @Override
     public boolean isTaskDone() {
         return isFinished;
     }
 
     @Override
-    public Iterator<Task> update(Iterable<Task> completed) {return null;}
+    public Iterator<Task> update(Iterable<Task> completed) {
+        return null;
+    }
 
     @Override
-    public void acceptTask(Task task){
+    public void acceptTask(Task task) {
         if (task instanceof AutoShooterTask) {
             AutoShooterTask castedTask = (AutoShooterTask) task;
             if (castedTask.getAutoBankShot()) {
                 flywheel.setPower(castedTask.getShootingPower());
-                if (((DcMotorEx) flywheel).getVelocity() >= 300){
+                if (((DcMotorEx) flywheel).getVelocity() >= 300) {
                     bandy.setPower(1.0);
                 }
-            }
-            else if (castedTask.getAutoFarShot()) {
+            } else if (castedTask.getAutoFarShot()) {
                 flywheel.setPower(castedTask.getShootingPower());
-                if (((DcMotorEx) flywheel).getVelocity() >= 400){
+                if (((DcMotorEx) flywheel).getVelocity() >= 400) {
                     bandy.setPower(1.0);
                 }
             } else {
                 flywheel.setPower(0);
                 bandy.setPower(0);
+            }
+        } else if (task instanceof TeleopAgitatorTask) {
+            TeleopAgitatorTask castedTask = (TeleopAgitatorTask) task;
+            if (castedTask.getRunServoLeft()) {
+                agitator.setPower(castedTask.getServoPower());
+            } else if (castedTask.getRunServoRight()) {
+                agitator.setPower(castedTask.getServoPower());
+            } else {
+                agitator.setPower(0);
             }
         }
     }
