@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Units;
 import org.firstinspires.ftc.teamcode.task.TurnTask;
 import org.firstinspires.ftc.teamcode.task.UnsupportedTaskException;
 
-public final class LeftBackAuto extends AbstractQueuedLayer {
+public final class RightBackAuto extends AbstractQueuedLayer {
 
 	private static final double driveForwardDistance = 0.5;
 
@@ -21,7 +21,7 @@ public final class LeftBackAuto extends AbstractQueuedLayer {
 
 	private ArrayList<Task> queue;
 
-	public LeftBackAuto() {
+	public RightBackAuto() {
 		queue = new ArrayList<>();
 	}
 
@@ -32,11 +32,11 @@ public final class LeftBackAuto extends AbstractQueuedLayer {
 	public void acceptTask(Task task) {
 		if (task instanceof WinTask) {
 			queue.add(new LinearMovementTask(Units.convert(driveForwardDistance, Units.Distance.TILE, Units.Distance.M), 0));
-			queue.add(new LinearMovementTask(0, Units.convert(strafingDistance, Units.Distance.TILE, Units.Distance.M)));
-			queue.add(new TurnTask(Units.convert(turnAngle, Units.Angle.REV, Units.Angle.RAD)));
+			queue.add(new LinearMovementTask(0, -Units.convert(strafingDistance, Units.Distance.TILE, Units.Distance.M)));
+			queue.add(new TurnTask(-Units.convert(turnAngle, Units.Angle.REV, Units.Angle.RAD)));
 			setSubtasks(queue);
 		} else {
-			throw new UnsupportedTaskException("Left back auto is brokey, please fix");
+			throw new UnsupportedTaskException("Right back auto is brokey, please fix");
 		}
 	}
 
