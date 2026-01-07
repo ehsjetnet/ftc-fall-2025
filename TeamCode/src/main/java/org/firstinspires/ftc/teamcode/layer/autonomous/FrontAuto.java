@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.task.WinTask;
 import org.firstinspires.ftc.teamcode.task.LinearMovementTask;
 import org.firstinspires.ftc.teamcode.Units;
 import org.firstinspires.ftc.teamcode.task.UnsupportedTaskException;
+import org.firstinspires.ftc.teamcode.task.AutoShooterTask;
 
 public final class FrontAuto extends AbstractQueuedLayer {
 
@@ -28,7 +29,8 @@ public final class FrontAuto extends AbstractQueuedLayer {
     public void acceptTask(Task task) {
         if (task instanceof WinTask) {
             queue.add(new LinearMovementTask(Units.convert(backupDistance, Units.Distance.TILE, Units.Distance.M), 0));
-            setSubtasks(queue);
+            queue.add(new AutoShooterTask(true, false));
+	    setSubtasks(queue);
         } else {
             throw new UnsupportedTaskException("Front auto is brokey, please fix");
         }
