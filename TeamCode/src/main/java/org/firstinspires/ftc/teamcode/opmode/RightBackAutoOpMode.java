@@ -11,12 +11,12 @@ import org.firstinspires.ftc.teamcode.layer.TopLayerSequence;
 import org.firstinspires.ftc.teamcode.layer.WinLayer;
 import org.firstinspires.ftc.teamcode.layer.drive.MecanumDrive;
 import org.firstinspires.ftc.teamcode.layer.ShooterIntakeLayer;
-import org.firstinspires.ftc.teamcode.layer.autonomous.LeftBackAuto;
+import org.firstinspires.ftc.teamcode.layer.autonomous.RightBackAuto;
 
-@Autonomous(name="Left Back Auto")
-public final class LeftBackAutoOpMode extends AbstractLayerOpMode {
+@Autonomous(name="Right Back Auto")
+public final class RightBackAutoOpMode extends AbstractLayerOpMode {
 
-	public LeftBackAutoOpMode() { }
+	public RightBackAutoOpMode() { }
 
 	@Override
 	protected List<Layer> getLayers() {
@@ -25,7 +25,7 @@ public final class LeftBackAutoOpMode extends AbstractLayerOpMode {
 				new MecanumDrive(),
 				new ShooterIntakeLayer()
 			)),
-			new LeftBackAuto(),
+			new RightBackAuto(),
 			new TopLayerSequence(Arrays.asList(
 				new WinLayer()
 			))
