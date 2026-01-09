@@ -5,6 +5,7 @@ import java.util.Iterator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.layer.Layer;
 import org.firstinspires.ftc.teamcode.layer.LayerSetupInfo;
@@ -22,6 +23,10 @@ public final class ShooterIntakeLayer implements Layer {
 
     private static final String agitatorName = "servo 1";
 
+    private ElapsedTime timer;
+
+    private startTime = 0;
+
     private DcMotor flywheel;
 
     private DcMotor bandy;
@@ -38,6 +43,7 @@ public final class ShooterIntakeLayer implements Layer {
         flywheel = setupInfo.getHardwareMap().get(DcMotor.class, flywheelMotorName);
         bandy = setupInfo.getHardwareMap().get(DcMotor.class, intakeMotorName);
         agitator = setupInfo.getHardwareMap().get(CRServo.class, agitatorName);
+	timer = new ElapsedTime();
         isFinished = true;
     }
 
@@ -71,10 +77,14 @@ public final class ShooterIntakeLayer implements Layer {
             }
         } else if (task instanceof TeleopAgitatorTask) {
             TeleopAgitatorTask castedTask = (TeleopAgitatorTask) task;
-            if (castedTask.getRunServoLeft()) {
-                agitator.setPower(castedTask.getServoPower());
-            } else if (castedTask.getRunServoRight()) {
-                agitator.setPower(castedTask.getServoPower());
+            if (castedTask.getRunServo()) {
+		startTime = timer.miliseconds();
+		if (timer.miliseconds() - startTime < 750) {
+			agitator.setPower(1);
+		}
+		if (startTime - timer.milliseconds() > 750 && startTime - timer.milliseconds() < 1500) {
+			agitator.setPower(-1);
+		}
             } else {
                 agitator.setPower(0);
             }
