@@ -17,7 +17,7 @@ public final class TeleopAgitatorMapping extends AbstractFunctionLayer {
     public Task map(Task task) {
         if (task instanceof GamepadInputTask) {
             GamepadInputTask castedTask = (GamepadInputTask) task;
-            return new TeleopAgitatorTask(castedTask.gamepad0.dpad.left, castedTask.gamepad0.dpad.right);
+            return new TeleopAgitatorTask(castedTask.gamepad0.dpad.left);
         } else {
             throw new UnsupportedTaskException(this, task);
         }
