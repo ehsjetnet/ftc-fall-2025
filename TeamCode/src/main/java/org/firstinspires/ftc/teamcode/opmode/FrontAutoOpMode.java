@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.opmode;
 import java.util.Arrays;
 import java.util.List;
 
-import com.qualcomm.robotcore.eventloop.opmode.autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.layer.Layer;
 import org.firstinspires.ftc.teamcode.layer.MultiplexLayer;
@@ -16,17 +16,17 @@ import org.firstinspires.ftc.teamcode.layer.autonomous.FrontAuto;
 @Autonomous(name = "Front Auto")
 public final class FrontAutoOpMode extends AbstractLayerOpMode {
 
-    public FrontAutoOpMode() {
-    }
+    public FrontAutoOpMode() {}
 
     @Override
     protected List<Layer> getLayers() {
         return Arrays.asList(
-                new MultiplexLayer(Arrays.asList(
-                        new MecanumDrive(),
-                        new ShooterIntakeLayer())),
-                new FrontAuto(),
-                new TopLayerSequence(Arrays.asList(
-                        new WinLayer())));
+        new MultiplexLayer(Arrays.asList(
+                new MecanumDrive(),
+                new ShooterIntakeLayer())
+        ),
+        new FrontAuto(),
+        new WinLayer()
+        );
     }
 }

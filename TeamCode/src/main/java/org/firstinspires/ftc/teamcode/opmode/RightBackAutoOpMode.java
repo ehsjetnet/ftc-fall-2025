@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.opmode;
 import java.util.Arrays;
 import java.util.List;
 
-import com.qualcomm.robotcore.eventloop.opmode.autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.layer.Layer;
 import org.firstinspires.ftc.teamcode.layer.MultiplexLayer;
@@ -21,14 +21,9 @@ public final class RightBackAutoOpMode extends AbstractLayerOpMode {
 	@Override
 	protected List<Layer> getLayers() {
 		return Arrays.asList(
-			new MultiplexLayer(Arrays.asList(
-				new MecanumDrive(),
-				new ShooterIntakeLayer()
-			)),
+			new MecanumDrive(),
 			new RightBackAuto(),
-			new TopLayerSequence(Arrays.asList(
-				new WinLayer()
-			))
+			new WinLayer()
 		);
 	}
 }
