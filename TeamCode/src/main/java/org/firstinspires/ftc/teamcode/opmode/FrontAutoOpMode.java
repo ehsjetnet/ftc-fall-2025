@@ -22,8 +22,8 @@ public final class FrontAutoOpMode extends AbstractLayerOpMode {
     protected List<Layer> getLayers() {
         return Arrays.asList(
         new MultiplexLayer(Arrays.asList(
-                new MecanumDrive(),
-                new ShooterIntakeLayer())
+        new MecanumDrive(),
+        new ShooterIntakeLayer())
         ),
         new FrontAuto(),
         new WinLayer()
