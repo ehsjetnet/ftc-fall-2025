@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.task.UnsupportedTaskException;
 
 public final class LeftBackAuto extends AbstractQueuedLayer {
 
-	private static final double driveForwardDistance = 0.5;
+	private static final double driveForwardDistance = 1.5;
 
 	private static final double strafingDistance = 1.5;
 

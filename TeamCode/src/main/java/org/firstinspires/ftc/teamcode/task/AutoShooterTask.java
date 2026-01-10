@@ -7,30 +7,34 @@ import org.firstinspires.ftc.teamcode.task.Task;
  */
 public class AutoShooterTask implements Task {
 
-    private final boolean autoBankShot;
+    private final boolean shoot;
 
-    private final boolean autoFarShot;
+    private final boolean shooterEject;
+
+    private final boolean intake;
+
+    private final boolean eject;
     
-    public AutoShooterTask(boolean autoBankShot, boolean autoFarShot) {
-        this.autoBankShot = autoBankShot;
-        this.autoFarShot = autoFarShot;
+    public AutoShooterTask(boolean shoot, boolean shooterEject, boolean intake, boolean eject) {
+        this.shoot = shoot;
+        this.shooterEject = shooterEject;
+        this.intake = intake;
+        this.eject = eject;
     }
 
-    public final boolean getAutoBankShot() {
-        return this.autoBankShot;
+    public final boolean getShoot() {
+        return this.shoot;
     }
 
-    public final boolean getAutoFarShot(){
-        return this.autoFarShot;
+    public final boolean getShooterEject() {
+        return this.shooterEject;
     }
 
-    public final double getShootingPower(){
-        if (this.autoBankShot) {
-            return 1.0;
-        } else if (this.autoFarShot) {
-            return 1.0;
-        } else {
-            return 0;
-        }
+    public final boolean getIntake(){
+        return this.intake;
+    }
+
+    public final boolean getEject(){
+        return this.eject;
     }
 }

@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.task.AutoShooterTask;
 
 public final class FrontAuto extends AbstractQueuedLayer {
 
-    public static final double backupDistance = 0.75;
+    public static final double backupDistance = 1.5;
 
     private ArrayList<Task> queue;
 
@@ -30,7 +30,7 @@ public final class FrontAuto extends AbstractQueuedLayer {
         if (task instanceof WinTask) {
             queue.add(new LinearMovementTask(-Units.convert(backupDistance, Units.Distance.TILE, Units.Distance.M), 0));
             // queue.add(new AutoShooterTask(true, false));
-	    setSubtasks(queue);
+	        setSubtasks(queue);
         } else {
             throw new UnsupportedTaskException("Front auto is brokey, please fix");
         }
