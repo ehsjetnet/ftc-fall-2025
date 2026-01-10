@@ -15,4 +15,5 @@ public class TeleopAgitatorTask implements Task {
 
     public final boolean getRunServo() {
         return runServo;
+    }
 }

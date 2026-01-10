@@ -25,7 +25,7 @@ public final class ShooterIntakeLayer implements Layer {
 
     private ElapsedTime timer;
 
-    private startTime = 0;
+    private double startTime = 0;
 
     private DcMotor flywheel;
 
@@ -43,7 +43,7 @@ public final class ShooterIntakeLayer implements Layer {
         flywheel = setupInfo.getHardwareMap().get(DcMotor.class, flywheelMotorName);
         bandy = setupInfo.getHardwareMap().get(DcMotor.class, intakeMotorName);
         agitator = setupInfo.getHardwareMap().get(CRServo.class, agitatorName);
-	timer = new ElapsedTime();
+        timer = new ElapsedTime();
         isFinished = true;
     }
 
@@ -75,19 +75,7 @@ public final class ShooterIntakeLayer implements Layer {
                 flywheel.setPower(0);
                 bandy.setPower(0);
             }
-        } else if (task instanceof TeleopAgitatorTask) {
-            TeleopAgitatorTask castedTask = (TeleopAgitatorTask) task;
-            if (castedTask.getRunServo()) {
-		startTime = timer.miliseconds();
-		if (timer.miliseconds() - startTime < 750) {
-			agitator.setPower(1);
-		}
-		if (startTime - timer.milliseconds() > 750 && startTime - timer.milliseconds() < 1500) {
-			agitator.setPower(-1);
-		}
-            } else {
-                agitator.setPower(0);
-            }
         }
     }
 }
+

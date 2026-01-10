@@ -32,8 +32,8 @@ public final class RightBackAuto extends AbstractQueuedLayer {
 	public void acceptTask(Task task) {
 		if (task instanceof WinTask) {
 			queue.add(new LinearMovementTask(Units.convert(driveForwardDistance, Units.Distance.TILE, Units.Distance.M), 0));
-			queue.add(new LinearMovementTask(0, -Units.convert(strafingDistance, Units.Distance.TILE, Units.Distance.M)));
-			queue.add(new TurnTask(-Units.convert(turnAngle, Units.Angle.REV, Units.Angle.RAD)));
+			// queue.add(new LinearMovementTask(0, Units.convert(strafingDistance, Units.Distance.TILE, Units.Distance.M)));
+			// queue.add(new TurnTask(-Units.convert(turnAngle, Units.Angle.REV, Units.Angle.RAD)));
 			setSubtasks(queue);
 		} else {
 			throw new UnsupportedTaskException("Right back auto is brokey, please fix");

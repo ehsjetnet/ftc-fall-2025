@@ -28,8 +28,8 @@ public final class FrontAuto extends AbstractQueuedLayer {
     @Override
     public void acceptTask(Task task) {
         if (task instanceof WinTask) {
-            queue.add(new LinearMovementTask(Units.convert(backupDistance, Units.Distance.TILE, Units.Distance.M), 0));
-            queue.add(new AutoShooterTask(true, false));
+            queue.add(new LinearMovementTask(-Units.convert(backupDistance, Units.Distance.TILE, Units.Distance.M), 0));
+            // queue.add(new AutoShooterTask(true, false));
 	    setSubtasks(queue);
         } else {
             throw new UnsupportedTaskException("Front auto is brokey, please fix");
