@@ -11,11 +11,28 @@ import org.firstinspires.ftc.teamcode.layer.Layer;
 import org.firstinspires.ftc.teamcode.layer.LayerSetupInfo;
 import org.firstinspires.ftc.teamcode.task.Task;
 import org.firstinspires.ftc.teamcode.task.TeleopAgitatorTask;
+
 import org.firstinspires.ftc.teamcode.task.TeleopFeederTask;
 import org.firstinspires.ftc.teamcode.task.TeleopShooterTask;
 import org.firstinspires.ftc.teamcode.task.AutoShooterTask;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public final class ShooterIntakeLayer implements Layer {
+    private AprilTagProcessor aprilTagProcessor;
+
+    private VisionPortal visionPortal;
+
+    private List<AprilTagDetection> detectedTags = new ArrayList<>();
 
     private static final String flywheelMotorName = "flywheel";
 
@@ -45,6 +62,23 @@ public final class ShooterIntakeLayer implements Layer {
         agitator = setupInfo.getHardwareMap().get(CRServo.class, agitatorName);
         timer = new ElapsedTime();
         isFinished = true;
+
+
+        aprilTagProcessor = new AprilTagProcessor.Builder()
+                .setDrawTagID(true)
+                .setDrawTagOutline(true)
+                .setDrawAxes(true)
+                .setDrawCubeProjection(true)
+                .setOutputUnits(DistanceUnit.CM, AngleUnit.DEGREES)
+                .build();
+
+        VisionPortal.Builder builder = new VisionPortal.Builder();
+        builder.setCamera(setupInfo.getHardwareMap().get(WebcamName.class, "Webcam 1")); // This is a placeholder for the webcam name
+        // builder.setCameraResolution(new Size(640, 480));
+        builder.addProcessor(aprilTagProcessor);
+
+        visionPortal = builder.build();
+
     }
 
     @Override
@@ -60,11 +94,13 @@ public final class ShooterIntakeLayer implements Layer {
     @Override
     public void acceptTask(Task task) {
         if (task instanceof AutoShooterTask) {
+            detectedTags = aprilTagProcessor.getDetections();
             AutoShooterTask castedTask = (AutoShooterTask) task;
             if (castedTask.getShoot()) {
+                
                 flywheel.setPower(1.0);
             } else if (castedTask.getIntake()) {
-                bandy.setPower(1.0);
+                bandy.setPower(0.75);
             } else if (castedTask.getEject()) {
                 bandy.setPower(-1.0);
             } else if (castedTask.getShooterEject()) {
@@ -75,5 +111,10 @@ public final class ShooterIntakeLayer implements Layer {
             }
         }
     }
+
+    public List<AprilTagDetection> getDetectedTags() {
+        return detectedTags;
+    }
+
 }
 
