@@ -116,5 +116,18 @@ public final class ShooterIntakeLayer implements Layer {
         return detectedTags;
     }
 
+    public AprilTagDetection getTagBySpecificId(int id) {
+        for(AprilTagDetection detection : detectedTags) {
+            if(detection.id == id) {
+                return detection;
+            }
+        }
+        return null;
+    }
+     public void stop() {
+        if(visionPortal != null) {
+            visionPortal.close();
+        }
+     }
 }
 
