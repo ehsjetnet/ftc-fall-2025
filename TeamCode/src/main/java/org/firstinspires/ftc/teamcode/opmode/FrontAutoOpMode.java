@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.layer.WinLayer;
 import org.firstinspires.ftc.teamcode.layer.drive.MecanumDrive;
 import org.firstinspires.ftc.teamcode.layer.ShooterIntakeLayer;
 import org.firstinspires.ftc.teamcode.layer.autonomous.FrontAuto;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous(name = "Front Auto")
 public final class FrontAutoOpMode extends AbstractLayerOpMode {
@@ -23,7 +24,7 @@ public final class FrontAutoOpMode extends AbstractLayerOpMode {
         return Arrays.asList(
         new MultiplexLayer(Arrays.asList(
         new MecanumDrive(),
-        new ShooterIntakeLayer())
+        new ShooterIntakeLayer(this.telemetry))
         ),
         new FrontAuto(),
         new WinLayer()

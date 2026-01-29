@@ -16,6 +16,8 @@ import org.firstinspires.ftc.teamcode.layer.input.mapping.TeleopAgitatorMapping;
 import org.firstinspires.ftc.teamcode.layer.input.mapping.TeleopFeederMapping;
 import org.firstinspires.ftc.teamcode.layer.input.mapping.TeleopShooterMapping;
 import org.firstinspires.ftc.teamcode.layer.input.mapping.AutoShooterMapping;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 
 @TeleOp(name="Base Kit Teleop")
 public final class BasekitBotOpMode extends AbstractLayerOpMode{
@@ -27,7 +29,7 @@ public final class BasekitBotOpMode extends AbstractLayerOpMode{
         return Arrays.asList(
             new MultiplexLayer(Arrays.asList(
                 new MecanumDrive(),
-                new ShooterIntakeLayer()
+                new ShooterIntakeLayer(this.telemetry)
             )),
             new MultiplexLayer(Arrays.asList(
                 new JoystickHoloDriveMapping(),
