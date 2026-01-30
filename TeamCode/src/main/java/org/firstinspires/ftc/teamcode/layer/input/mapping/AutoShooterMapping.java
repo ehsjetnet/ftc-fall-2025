@@ -21,7 +21,8 @@ public final class AutoShooterMapping extends AbstractFunctionLayer {
             boolean intake = castedTask.gamepad0.bumpers.right;
             boolean shooterEject = castedTask.gamepad0.buttons.y;
             boolean eject = castedTask.gamepad0.buttons.a;
-            return new AutoShooterTask(shoot, shooterEject, intake, eject);
+            boolean experimental = castedTask.gamepad0.buttons.b;
+            return new AutoShooterTask(shoot, shooterEject, intake, eject, experimental);
         } else {
             throw new UnsupportedTaskException(this, task);
         }

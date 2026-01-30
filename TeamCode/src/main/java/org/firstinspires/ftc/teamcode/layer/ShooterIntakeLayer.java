@@ -101,15 +101,22 @@ public final class ShooterIntakeLayer implements Layer {
             detectedTags = aprilTagProcessor.getDetections();
             AutoShooterTask castedTask = (AutoShooterTask) task;
             if (castedTask.getShoot()) {
-                displayDetectionTelemetry(getTagBySpecificId(24));
                 flywheel.setPower(1);
-            } else if (castedTask.getIntake()) {
+            } else if(castedTask.getExperimental()) {
+                displayDetectionTelemetry(getTagBySpecificId(24));
+                ((DcMotorEx) flywheel).setVelocity(1350);
+                if(((DcMotorEx) flywheel).getVelocity() >= 1350) {
+                    bandy.setPower(1.0);
+                }
+            }
+             else if (castedTask.getIntake()) {
                 bandy.setPower(0.75);
             } else if (castedTask.getEject()) {
                 bandy.setPower(-1.0);
             } else if (castedTask.getShooterEject()) {
                 flywheel.setPower(-1.0);
             } else {
+                displayDetectionTelemetry(getTagBySpecificId(24));
                 flywheel.setPower(0);
                 bandy.setPower(0);
             }
