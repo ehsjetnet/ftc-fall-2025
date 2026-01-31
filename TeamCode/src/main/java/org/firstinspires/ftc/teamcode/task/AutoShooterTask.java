@@ -15,14 +15,17 @@ public class AutoShooterTask implements Task {
 
     private final boolean eject;
 
-    private final boolean experimental;
+    private final boolean experimentalRed;
+
+    private final boolean experimentalBlue;
     
-    public AutoShooterTask(boolean shoot, boolean shooterEject, boolean intake, boolean eject, boolean experimental) {
+    public AutoShooterTask(boolean shoot, boolean shooterEject, boolean intake, boolean eject, boolean experimentalRed, boolean experimentalBlue) {
         this.shoot = shoot;
         this.shooterEject = shooterEject;
         this.intake = intake;
         this.eject = eject;
-        this.experimental = experimental;
+        this.experimentalRed = experimentalRed;
+        this.experimentalBlue = experimentalBlue;
     }
 
     public final boolean getShoot() {
@@ -41,7 +44,11 @@ public class AutoShooterTask implements Task {
         return this.eject;
     }
 
-    public final boolean getExperimental(){
-        return this.experimental;
+    public final boolean getExperimentalRed(){
+        return this.experimentalRed;
+    }
+
+    public final boolean getExperimentalBlue(){
+        return this.experimentalBlue;
     }
 }

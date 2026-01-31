@@ -102,10 +102,16 @@ public final class ShooterIntakeLayer implements Layer {
             AutoShooterTask castedTask = (AutoShooterTask) task;
             if (castedTask.getShoot()) {
                 flywheel.setPower(1);
-            } else if(castedTask.getExperimental()) {
+            } else if(castedTask.getExperimentalRed()) {
                 displayDetectionTelemetry(getTagBySpecificId(24));
-                ((DcMotorEx) flywheel).setVelocity(1350);
-                if(((DcMotorEx) flywheel).getVelocity() >= 1350) {
+                ((DcMotorEx) flywheel).setVelocity(1400);
+                if(((DcMotorEx) flywheel).getVelocity() >= 1400) {
+                    bandy.setPower(1.0);
+                }
+            } else if(castedTask.getExperimentalBlue()) {
+                displayDetectionTelemetry(getTagBySpecificId(24));
+                ((DcMotorEx) flywheel).setVelocity(1325);
+                if(((DcMotorEx) flywheel).getVelocity() >= 1325) {
                     bandy.setPower(1.0);
                 }
             }
@@ -117,6 +123,7 @@ public final class ShooterIntakeLayer implements Layer {
                 flywheel.setPower(-1.0);
             } else {
                 displayDetectionTelemetry(getTagBySpecificId(24));
+                displayDetectionTelemetry(getTagBySpecificId(20));
                 flywheel.setPower(0);
                 bandy.setPower(0);
             }
